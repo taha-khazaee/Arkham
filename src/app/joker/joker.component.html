@@ -1,0 +1,9 @@
+<div class="w-50 mt-4 mr-auto">
+  <ul class="list-group">
+    <li *ngFor="let actor of Actors" class="list-group-item text-info" [class.active]="actor===selectedactor" (click)="onSelect(actor)">
+        <span class="badge badge-info mr-2">{{actor.id}}</span>
+      {{actor.name}}
+    </li>
+  </ul>
+</div>
+<app-joker-detail [actor]="selectedactor"></app-joker-detail>

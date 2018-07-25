@@ -1,0 +1,9 @@
+<div *ngIf="actor" class="mt-5">
+  <h4 class="text-primary">{{actor.name | uppercase}} Details</h4>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">name:</label>
+    <div class="col-sm-5">
+      <input class="form-control" [(ngModel)]="actor.name" placeholder="name">
+    </div>
+  </div>
+</div>
