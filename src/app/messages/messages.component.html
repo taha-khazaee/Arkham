@@ -1,0 +1,6 @@
+<div class="alert alert-success" *ngIf="messageService.messages.length">
+    <h4>Messages</h4>
+    <button class="mt-2 mb-2 btn btn-outline-primary" (click)="messageService.clear()">clear</button>
+    <div *ngFor='let message of messageService.messages' class="text-dark"> {{message}} </div>
+  
+  </div>  

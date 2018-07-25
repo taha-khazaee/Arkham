@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Actors } from '../jokers';
-import { JOKERS } from '../Jokers-mock';
 import {JokerService} from '../joker.service';
 @Component({
   selector: 'app-joker',
@@ -8,18 +7,16 @@ import {JokerService} from '../joker.service';
   styleUrls: ['./joker.component.scss']
 })
 export class JokerComponent implements OnInit {
-  Actors = JOKERS;
+  Actors:Actors[];
   selectedactor:Actors;
+  constructor(private jokerService:JokerService) { }
+  ngOnInit() {
+    this.getActors();
+  }
   onSelect(actor:Actors):void{
     this.selectedactor=actor;
   }
   getActors(): void {
-    this.Actors=this.jokerService.getActors();
+    this.jokerService.getActors().subscribe(actors=> this.Actors=actors);
   }
-  constructor(private jokerService:JokerService) { }
-
-  ngOnInit() {
-    this.getActors();
-  }
-
 }
