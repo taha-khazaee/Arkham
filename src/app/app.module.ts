@@ -5,17 +5,21 @@ import { AppComponent } from './app.component';
 import { JokerComponent } from './joker/joker.component';
 import { JokerDetailComponent } from './joker-detail/joker-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JokerComponent,
     JokerDetailComponent,
-    MessagesComponent,    
+    MessagesComponent,
+    DashboardComponent,    
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
