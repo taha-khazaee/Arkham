@@ -1,0 +1,13 @@
+<div class="card" class="w-50 mt-5 mr-auto" id="search-component">
+  <div class="card-header text-primary">
+    Actors Search
+    <input class="form-control border border-success" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let actor of actors$ | async">
+      <a class="list-group-item list-group-item-action text-info" routerLink="/detail/{{actor.id}}">
+        {{actor.name}}
+      </a>
+    </li>
+  </ul>
+</div>

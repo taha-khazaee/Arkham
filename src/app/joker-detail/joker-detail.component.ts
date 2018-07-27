@@ -27,5 +27,9 @@ export class JokerDetailComponent implements OnInit {
   goBack():void{
     this.location.back();
   }
+  save(): void {
+    this.jokerService.updateActor(this.actor)
+      .subscribe(() => this.goBack());
+  }
 
 }
