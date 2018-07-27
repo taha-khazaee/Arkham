@@ -8,10 +8,13 @@ import {JokerService} from '../joker.service';
 })
 export class DashboardComponent implements OnInit {
   actors:Actors[]=[];
-  constructor() { }
+  constructor(private jokerService:JokerService) { }
 
   ngOnInit() {
-    // this.
+    this.getActors();
+  }
+  getActors():void{
+    this.jokerService.getTopActors().subscribe(actors=>this.actors=actors);
   }
 
 }

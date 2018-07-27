@@ -1,9 +1,14 @@
-<div class="w-50 mt-4 mr-auto">
-  <ul class="list-group">
-    <li *ngFor="let actor of Actors" class="list-group-item text-info" [class.active]="actor===selectedactor" (click)="onSelect(actor)">
-        <span class="badge badge-info mr-2">{{actor.id}}</span>
-      {{actor.name}}
+<div class="card" class="w-50 mt-5 mr-auto">
+  <div class="card-header text-primary">
+    All Actors
+  </div>
+  <ul class="list-group list-group-flush">
+    <!-- <li *ngFor="let actor of Actors" class="list-group-item text-info" [class.active]="actor===selectedactor" (click)="onSelect(actor)"> -->
+    <li *ngFor="let actor of Actors" class="list-group-item" [class.active]="actor===selectedactor">
+      <a class="list-group-item list-group-item-action text-info" routerLink="/detail/{{actor.id}}">
+        <span class="border border-primary mr-2 p-1 text-dark rounded-left">{{actor.id}}</span>
+        {{actor.name}}
+      </a>
     </li>
   </ul>
 </div>
-<app-joker-detail [actor]="selectedactor"></app-joker-detail>

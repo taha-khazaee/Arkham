@@ -1,6 +1,9 @@
-<div class="alert alert-success" *ngIf="messageService.messages.length">
-    <h4>Messages</h4>
-    <button class="mt-2 mb-2 btn btn-outline-primary" (click)="messageService.clear()">clear</button>
-    <div *ngFor='let message of messageService.messages' class="text-dark"> {{message}} </div>
-  
-  </div>  
+<div class="card w-50 mt-5 mr-aut">
+    <div class="card-header text-primary">
+        Messages
+    </div>
+  <div *ngIf="messageService.messages.length" class="ml-3 p-2">
+    <button class="mt-2 mb-2 btn btn-outline-warning" (click)="messageService.clear()">clear</button>
+    <div *ngFor='let message of messageService.messages' class="text-info"> {{message}} </div>
+  </div>
+</div>
