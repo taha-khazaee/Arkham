@@ -1,30 +1,30 @@
-<div class="card" class="w-50 mt-5 mr-auto">
+<div class="card w-75 mt-5 mr-auto mb-5">
+  <div class="card-header text-primary">
+    Add Actors
+  </div>
+  <div class="form-group row p-3">
+    <label class="col-sm-2 col-form-label">Actor name:</label>
+    <div class="col-sm-5">
+      <input class="form-control" #actorName/>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-outline-primary ml-4" (click)="add(actorName.value); actorName.value=''">add</button>
+  </div>
+</div>
+<div class="card" class="w-50 mt-5 mb-5 mr-auto">
   <div class="card-header text-primary">
     All Actors
   </div>
   <ul class="list-group list-group-flush">
     <!-- <li *ngFor="let actor of Actors" class="list-group-item text-info" [class.active]="actor===selectedactor" (click)="onSelect(actor)"> -->
     <li *ngFor="let actor of Actors" class="list-group-item" [class.active]="actor===selectedactor">
-      <a class="list-group-item list-group-item-action text-info" routerLink="/detail/{{actor.id}}">
+      <p class="list-group-item">
         <span class="border border-primary mr-2 p-1 text-dark rounded-left">{{actor.id}}</span>
-        {{actor.name}}
-      </a>
-      <button class="btn btn-outline-danger" title="delete Actor"  (click)="delete(actor)">x</button>
+        <a class="list-group-item-action text-info"  routerLink="/detail/{{actor.id}}">{{actor.name}}</a>
+        <span class="border border-danger ml-2 p-1 text-dark rounded-right" title="delete Actor" (click)="delete(actor)">x</span>
+      </p>
+
     </li>
   </ul>
-</div>
-
-<div  class="card w-75 mt-5 mr-auto">
-    <div class="card-header text-primary">
-        Add Actors
-    </div>  
-  <div class="form-group row p-3">
-    <label class="col-sm-2 col-form-label">Actor name:</label>
-    <div class="col-sm-5">
-      <input class="form-control" #actorName placeholder="name">
-    </div>
-  </div>
-  <div class="form-group">
-      <button class="btn btn-outline-primary ml-4" (click)="add(actor.value); actor.value=''">add</button>
-  </div>
 </div>

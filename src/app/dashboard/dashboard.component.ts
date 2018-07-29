@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
     this.getActors();
   }
   getActors():void{
-    this.jokerService.getTopActors().subscribe(actors=>this.actors=actors);
+    this.jokerService.getTopActors().subscribe(actors=>this.actors=actors.filter(actor=>actor.id===2 || actor.id===7));
   }
 
 }

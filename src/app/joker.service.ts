@@ -7,13 +7,14 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 import { MessageService } from './message.service';
-@Injectable({providedIn: 'root'})
+import { query } from '../../node_modules/@angular/core/src/render3/query';
+@Injectable({ providedIn: 'root' })
 export class JokerService {
-  private actorsURL = 'api/Jokers';
-  constructor(private http: HttpClient,private messageservice: MessageService) { }
-  getActors(): Observable<Actors[]> {    
+  private actorsURL = 'api/JOKERS';
+  constructor(private http: HttpClient, private messageservice: MessageService) { }
+  getActors(): Observable<Actors[]> {
     return this.http.get<Actors[]>(this.actorsURL).pipe(
-      tap(heroes => this.log('fetched heroes')),
+      tap(actors => this.log('All actors Fetched')),
       catchError(this.handleError('getActors', []))
     );;
   }
@@ -23,28 +24,25 @@ export class JokerService {
       .pipe(
         map(actors => Actors[0]), // returns a {0|1} element array
         tap(a => {
-          const outcome = a ? `fetched` : `did not find`;
+          const outcome = a ? `Fetched` : `did not find`;
           this.log(`${outcome} actor id=${id}`);
         }),
         catchError(this.handleError<Actors>(`getActor id=${id}`))
       );
   }
-  getTopActors(): Observable<Actors[]> {    
-    let tops = [];
-    let actors = this.getActors();
-    tops.push(actors[1]);
-    tops.push(actors[6]);
-    return of(tops);
+  getTopActors(): Observable<Actors[]> {        
+    let tops = this.getActors();
+    return tops;    
   }
   getActor(id: number): Observable<Actors> {
-    const url = `${this.actorsURL}/${id}`;      
+    const url = `${this.actorsURL}/${id}`;
     return this.http.get<Actors>(url).pipe(
-      tap(_ =>this.log(`fetched hero id=${id}`),
-      catchError(this.handleError<Actors>(`getActor id=${id}`))
-    )
-  );  
+      tap(_ => this.log(`Fatched actor id=${id}`),
+        catchError(this.handleError<Actors>(`getActor id=${id}`))
+      )
+    );
   }
-  updateActor (actor: Actors): Observable<any> {
+  updateActor(actor: Actors): Observable<any> {
     return this.http.put(this.actorsURL, actor, httpOptions).pipe(
       tap(_ => this.log(`updated actor id=${actor.id}`)),
       catchError(this.handleError<any>('updateActor'))
@@ -60,28 +58,28 @@ export class JokerService {
       catchError(this.handleError<Actors[]>('searchActors', []))
     );
   }
-  addActor (actor: Actors): Observable<Actors> {
+  addActor(actor: Actors): Observable<Actors> {
     return this.http.post<Actors>(this.actorsURL, actor, httpOptions).pipe(
-      tap((actor: Actors) => this.log(`added actor w/ id=${actor.id}`)),
+      tap((actor: Actors) => this.log(`added actor id=${actor.id}`)),
       catchError(this.handleError<Actors>('addActor'))
     );
   }
-  deleteActor (actor: Actors | number): Observable<Actors> {
+  deleteActor(actor: Actors | number): Observable<Actors> {
     const id = typeof actor === 'number' ? actor : actor.id;
     const url = `${this.actorsURL}/${id}`;
-  
+
     return this.http.delete<Actors>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Actors>('deleteHero'))
+      tap(_ => this.log(`deleted actor id=${id}`)),
+      catchError(this.handleError<Actors>('deleteActor'))
     );
-  }  
-   private log(message: string) {
+  }
+  private log(message: string) {
     this.messageservice.add(`JService: ${message}`);
   }
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {         
-      console.error(error);      
-      this.log(`${operation} failed: ${error.message}`);         
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
   }

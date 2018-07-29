@@ -20,14 +20,14 @@ export class JokerComponent implements OnInit {
     this.jokerService.getActors().subscribe(actors => this.Actors = actors);
   }
   add(name: string): void {
-    name = name.trim();
+    name = name.trim();    
     if (!name) { return; }
     this.jokerService.addActor({ name } as Actors)
       .subscribe(actor => {
         this.Actors.push(actor);
       });
   }
-  delete(actor: Actors): void {
+  delete(actor: Actors): void {    
     this.Actors = this.Actors.filter(a => a !== actor);
     this.jokerService.deleteActor(actor).subscribe();
   }
